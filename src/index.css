@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #05070b;
+  --color-abyss: #090d16;
+  --color-panel: #0b111e;
+  --color-emerald-glow: #10b981;
+  --color-cyan-glow: #06b6d4;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #05070b;
+  color: #e2e8f0;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+
+  /* Global text-selection lock — no highlight boxes while dragging across the canvas / hero. */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Form fields must remain selectable / editable. */
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+::selection {
+  background: rgba(16, 185, 129, 0.35);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05070b;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981, #06b6d4);
+  border-radius: 8px;
+  border: 2px solid #05070b;
+}
+
+/* Glassmorphism */
+.glass {
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.glass-strong {
+  background: linear-gradient(135deg, rgba(13,20,36,0.92), rgba(9,13,22,0.96));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.09);
+}
+
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(16,185,129,0.5), rgba(6,182,212,0.4), rgba(16,185,129,0.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.glow-border-hover {
+  transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.glow-border-hover:hover::before {
+  opacity: 1;
+  background: linear-gradient(135deg, rgba(16,185,129,0.9), rgba(6,182,212,0.7), rgba(16,185,129,0.3));
+  box-shadow: 0 0 32px rgba(16,185,129,0.25), 0 0 64px rgba(6,182,212,0.12);
+}
+
+/* Text glows */
+.text-glow-emerald {
+  text-shadow: 0 0 24px rgba(16,185,129,0.6), 0 0 64px rgba(16,185,129,0.25);
+}
+.text-glow-cyan {
+  text-shadow: 0 0 24px rgba(6,182,212,0.6), 0 0 64px rgba(6,182,212,0.25);
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #fff 10%, #6ee7b7 45%, #22d3ee 75%, #fff 105%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 7s linear infinite;
+}
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+/* Grid backdrop */
+.bg-blueprint {
+  background-image:
+    linear-gradient(rgba(16,185,129,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,185,129,0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 75%);
+}
+
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.14) 3px,
+    rgba(0,0,0,0.14) 4px
+  );
+  border-radius: inherit;
+}
+
+.terminal-caret::after {
+  content: "▋";
+  animation: blink 1s step-end infinite;
+  color: #10b981;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Marquee ticker */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+/* Radar sweep */
+@keyframes sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.radar-sweep {
+  background: conic-gradient(from 0deg, rgba(16,185,129,0.35), transparent 70deg, transparent);
+  animation: sweep 4s linear infinite;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.pulse-ring {
+  animation: pulse-ring 2.2s cubic-bezier(0.22,1,0.36,1) infinite;
+}
+
+@keyframes hex-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Themed cursor ---------- */
+html.custom-cursor,
+html.custom-cursor *:not(input):not(textarea):not(select):not([contenteditable="true"]) {
+  cursor: none !important;
+}
+
+/* Native I-beam text-selection cursor for all text inputs */
+html.custom-cursor input,
+html.custom-cursor textarea,
+html.custom-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+html.custom-cursor select {
+  cursor: default !important;
+}
+
+/*
+ * POSITION LAYER — translate only.
+ * Fixed coordinate frame at the viewport origin; the ONLY thing that ever changes
+ * here is --x / --y. No transitions, no animations, nothing else composes into
+ * this transform, so press / hover states can never displace the anchor.
+ */
+.cursor-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(var(--x, -100px), var(--y, -100px), 0);
+  will-change: transform;
+  transition: none;
+}
+
+/*
+ * VISUAL LAYERS — centered on the layer anchor with size-aware negative margins
+ * (width / height / margin animate on the same curve, so the centre never drifts).
+ * `transform` here is scale() ONLY.
+ */
+.cursor-dot,
+.cursor-ring {
+  --s: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: scale(var(--s));
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+/* Inner dot — sticks to the hardware pointer. Zero transitions on positioning, smooth fade on input hover. */
+.cursor-dot {
+  --size: 6px;
+  background: rgba(94, 234, 212, 0.9);
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.7);
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+.cursor-dot.is-active {
+  --size: 8px;
+  background: #14b8a6;
+  box-shadow: 0 0 14px rgba(20, 184, 166, 1), 0 0 28px rgba(20, 184, 166, 0.5);
+}
+.cursor-dot.is-pressed {
+  --s: 0.85;
+}
+
+/* Outer ring — glides behind the dot via rAF lerp; visual transitions only. */
+.cursor-ring {
+  --size: 28px;
+  border: 1px solid rgba(94, 234, 212, 0.55);
+  box-shadow: 0 0 10px rgba(45, 212, 191, 0.25), inset 0 0 8px rgba(45, 212, 191, 0.12);
+  opacity: 1;
+  transition:
+    width 0.2s ease-in-out,
+    height 0.2s ease-in-out,
+    margin 0.2s ease-in-out,
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out,
+    opacity 0.15s ease-in-out,
+    transform 0.12s ease-out; /* transform === scale() only on this layer */
+  animation: cursor-halo 2.2s ease-in-out infinite;
+  will-change: transform, width, height;
+}
+.cursor-ring.is-active {
+  --size: 56px;
+  border-color: rgba(45, 212, 191, 0.9);
+  box-shadow: 0 0 22px rgba(20, 184, 166, 0.55), 0 0 44px rgba(20, 184, 166, 0.25), inset 0 0 14px rgba(45, 212, 191, 0.2);
+  animation: none;
+}
+.cursor-ring.is-pressed {
+  --s: 0.85;
+}
+
+.cursor-hidden {
+  opacity: 0 !important;
+}
+
+@keyframes cursor-halo {
+  0%, 100% { box-shadow: 0 0 10px rgba(45, 212, 191, 0.25), inset 0 0 8px rgba(45, 212, 191, 0.12); border-color: rgba(94, 234, 212, 0.55); }
+  50% { box-shadow: 0 0 18px rgba(45, 212, 191, 0.45), inset 0 0 12px rgba(45, 212, 191, 0.2); border-color: rgba(94, 234, 212, 0.85); }
+}
+
+/* Hover reveal on the hovered interactive target */
+a, button, [role='button'], .interactive, .glow-border-hover {
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.cursor-hovered {
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.55), 0 0 18px rgba(20, 184, 166, 0.28), 0 0 36px rgba(20, 184, 166, 0.12) !important;
+  border-color: rgba(45, 212, 191, 0.55) !important;
+}
+.cursor-hovered.glow-border::before {
+  opacity: 1;
+  background: linear-gradient(135deg, rgba(45,212,191,0.95), rgba(6,182,212,0.7), rgba(45,212,191,0.35));
+}
+
+/* Custom range / noise */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
