@@ -164,9 +164,9 @@ export const EDUCATION = [
     school: "CBSE Curriculum",
     degree: "Higher Secondary Education (Science)",
     period: "Completed",
-    location: "Kolkata, WB",
+
     desc: "Foundational studies in mathematics and computer science that preceded specialization in cybersecurity and networking.",
-    tags: ["Mathematics", "Computer Science", "Foundational Studies"],
+    tags: ["Physics", "Chemistry", "Biology", "Physical Education", "English"]
     current: false,
   },
 ];
