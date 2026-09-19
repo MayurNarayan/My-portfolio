@@ -166,7 +166,7 @@ export const EDUCATION = [
     period: "Completed",
 
     desc: "Foundational studies in mathematics and computer science that preceded specialization in cybersecurity and networking.",
-    tags: ["Physics", "Chemistry", "Biology", "Physical Education", "English"]
+    tags: ["Physics", "Chemistry", "Biology", "Physical Education", "English"],
     current: false,
   },
 ];
