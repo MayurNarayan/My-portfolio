@@ -165,7 +165,7 @@ export const EDUCATION = [
     degree: "Higher Secondary Education (Science)",
     period: "Completed",
 
-    desc: "Foundational studies in mathematics and computer science that preceded specialization in cybersecurity and networking.",
+    desc: "Comprehensive study in foundational natural sciences, developing critical analysis, laboratory methodology, and empirical problem-solving.",
     tags: ["Physics", "Chemistry", "Biology", "Physical Education", "English"],
     current: false,
   },
