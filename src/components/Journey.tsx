@@ -62,16 +62,7 @@ export function Experience({ onVerify }: { onVerify: (ids: string[], title: stri
               </span>
               <span className="ml-2 font-mono text-[10px] text-slate-500 transition group-hover:text-emerald-300">verify →</span>
             </button>
-            <a
-              href={PROFILE.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View resume / CV (opens in a new tab)"
-              className="flex w-fit items-center gap-2 rounded-2xl border border-white/12 bg-black/30 px-4 py-3 font-display text-[13px] font-semibold text-slate-200 transition hover:border-cyan-400/50 hover:text-cyan-200"
-            >
-              <FileDown className="h-4 w-4 text-cyan-300" /> View Resume
-              <ExternalLink className="h-3.5 w-3.5 text-slate-500" />
-            </a>
+        
             </div>
           </div>
           <p className="mt-5 max-w-3xl text-[14.5px] leading-relaxed text-slate-300">{EXPERIENCE.summary}</p>
